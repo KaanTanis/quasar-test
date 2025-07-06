@@ -1,8 +1,8 @@
-    import { defineStore } from 'pinia';
-    import { ref } from 'vue';
-    import type { Task } from 'src/types/task';
-    import * as taskService from 'src/services/taskService';
-    import { Notify } from 'quasar';
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
+import type { Task } from 'src/types/task';
+import * as taskService from 'src/services/taskService';
+import { Notify } from 'quasar';
 
 export const useTaskStore = defineStore('task', () => {
     const tasks = ref<Task[]>([]);
@@ -10,10 +10,10 @@ export const useTaskStore = defineStore('task', () => {
 
     const fetchTasks = async () => {
         try {
-        const { data } = await taskService.fetchTasks();
-        tasks.value = data.data;
+            const { data } = await taskService.fetchTasks();
+            tasks.value = data.data;
         } catch {
-        notifyError('Görevler alınamadı.');
+            notifyError('Görevler alınamadı.');
         }
     };
 
@@ -26,7 +26,7 @@ export const useTaskStore = defineStore('task', () => {
             newTaskTitle.value = '';
             notifySuccess('Görev eklendi.');
         } catch {
-        notifyError('Görev eklenemedi.');
+            notifyError('Görev eklenemedi.');
         }
     };
 
@@ -35,7 +35,7 @@ export const useTaskStore = defineStore('task', () => {
             await taskService.updateTaskStatus(task);
             notifySuccess('Durum güncellendi.');
         } catch {
-        notifyError('Durum güncellenemedi.');
+            notifyError('Durum güncellenemedi.');
         }
     };
 
@@ -44,7 +44,7 @@ export const useTaskStore = defineStore('task', () => {
             await taskService.updateTaskTitle(task);
             notifySuccess('Görev güncellendi.');
         } catch {
-        notifyError('Güncelleme hatası.');
+            notifyError('Güncelleme hatası.');
         }
     };
 
@@ -54,7 +54,7 @@ export const useTaskStore = defineStore('task', () => {
             tasks.value = tasks.value.filter((t) => t.id !== id);
             notifySuccess('Görev silindi.');
         } catch {
-        notifyError('Silme hatası.');
+            notifyError('Silme hatası.');
         }
     };
 
